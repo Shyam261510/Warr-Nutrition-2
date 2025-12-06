@@ -26,10 +26,12 @@ import DialogCompo from "@/app/component/comman/DialogCompo";
 import Login from "./Login";
 import { RootState } from "@/utils/store";
 import useUserData from "@/hooks/useUserData";
+import { useSignOut } from "@/hooks/SignOutHandler";
 
 function Navbar() {
   const pathname = usePathname();
   const navigation = useRouter();
+  const signOutHandler = useSignOut();
 
   const dispatch = useDispatch();
   const { status } = useUserData();
@@ -39,6 +41,12 @@ function Navbar() {
   );
   const userInfo = useSelector((state: RootState) => state.dataSlice.userInfo);
   const cart = useSelector((state: RootState) => state.dataSlice.cart);
+
+  useEffect(() => {
+    if (status === "unauthenticated" && userInfo.id) {
+      signOutHandler();
+    }
+  }, [status, userInfo.id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,7 +115,6 @@ function Navbar() {
       if (success) {
         dispatch(setCart(data));
       } else {
-        console.error("API Error fetching cart:", message);
         dispatch(setCart({} as Cart));
       }
     } catch (error) {
