@@ -11,14 +11,13 @@ import Difference from "./component/Difference/Difference";
 import VideoSection from "./component/VideoSection/VideoSection";
 import Products from "./component/Products/Products";
 import Testimonial from "./component/Testimonial/Testimonial";
-import BrandSection from "./component/BrandSection/BrandSection";
+// import BrandSection from "./component/BrandSection/BrandSection";
 import WhyWarr from "./component/WhyWarr/WhyWarr";
 import ChooseWarr from "./component/ChooseWarr/ChooseWarr";
 import ImageTestimonial from "./component/Testimonial/ImageTestimonial";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+
 export default function Home() {
-  const navigate = useRouter();
   const isLoading = useSelector(
     (state: RootState) => state.dataSlice.isLoading
   );
@@ -35,12 +34,12 @@ export default function Home() {
         <div className="flex justify-center items-center mb-2">
           {" "}
           <Button
-            className="cursor-pointer bg-gradient-to-br from-[#B50D27] to-[#DA203A] text-white px-6 py-2 rounded-md shadow-md hover:opacity-90 transition"
+            className="cursor-pointer bg-gradient-to-br bg-[#111111] text-white px-6 py-2 rounded-md shadow-md hover:opacity-90 transition"
             onClick={() =>
               window.open("https://authenticate.warrnutrition.com/", "_blank")
             }
           >
-            Product Authentication
+            PRODUCT AUTHENTICATION
           </Button>
         </div>
 
