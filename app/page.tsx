@@ -38,6 +38,9 @@ export default function Home() {
               transition: { duration: 0.4, repeat: Infinity },
             }}
             className="cursor-pointer font-bold bg-[#111111] text-white px-6 py-2 rounded-md shadow-md"
+            onClick={() =>
+              window.open("https://authenticate.warrnutrition.com/", "_blank")
+            }
           >
             PRODUCT AUTHENTICATION
           </motion.button>
