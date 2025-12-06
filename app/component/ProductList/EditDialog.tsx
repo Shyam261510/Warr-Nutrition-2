@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useTransition } from "react";
+import Image from "next/image";
 import UploadImage from "@/app/component/UploadImage";
 import {
   Benefit,
@@ -545,10 +546,12 @@ function EditDialog({ dialogCloseHandler, product }: EditDialogProps) {
                 <div className="mt-2 flex flex-wrap gap-4 items-center">
                   {files.map((file) => (
                     <div key={file.id} className="relative group">
-                      <img
+                      <Image
                         src={file.preview}
                         alt="Product preview"
                         className="h-24 w-24 object-cover rounded-md border"
+                        width={96}
+                        height={96}
                       />
                       <button
                         type="button"
@@ -572,7 +575,7 @@ function EditDialog({ dialogCloseHandler, product }: EditDialogProps) {
                   </div>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">
-                  Click the '+' to add new images.
+                  Click the &apos;+&apos; to add new images.
                 </p>
               </div>
 

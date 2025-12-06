@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, DragEvent, ChangeEvent } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import clsx from "clsx";
 import {
@@ -212,10 +213,12 @@ export default function UploadImage({ files, setFiles }: ImageUploadType) {
               >
                 <div className="relative flex-shrink-0">
                   {file.type.startsWith("image/") && (
-                    <img
+                    <Image
                       src={file.preview}
                       alt={file.name}
                       className="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover border dark:border-zinc-700 shadow-sm"
+                      width={80}
+                      height={80}
                     />
                   )}
                   {file.progress === 100 && (

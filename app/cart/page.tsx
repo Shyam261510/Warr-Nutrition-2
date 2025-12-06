@@ -437,7 +437,7 @@ export default function CartPage() {
             </h2>{" "}
             {/* 🌹 */}
             <p className="mt-2 text-gray-600">
-              Looks like you haven't added any products yet.
+              Looks like you haven&apos;t added any products yet.
             </p>
             <Link href="/" className="mt-6">
               <Button className="bg-gradient-to-r from-[#B50D27] to-[#DA203A] hover:opacity-90 text-white">

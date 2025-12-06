@@ -56,21 +56,24 @@ export function HeroSection() {
         >
           {slides.map((slide, index) => (
             <div key={index} className="w-full flex-shrink-0 relative">
-              {/* Desktop Image */}
-              <img
-                src={slide.desktop || "/placeholder.svg"}
-                alt={`Desktop slide ${index + 1}`}
-                className="hidden md:block w-full h-auto object-cover min-h-[300px] max-h-[600px]"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-
-              {/* Mobile Image */}
-              <img
-                src={slide.mobile || "/placeholder.svg"}
-                alt={`Mobile slide ${index + 1}`}
-                className="block md:hidden w-full h-auto object-cover min-h-[200px] max-h-[400px]"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
+              <div className="relative w-full h-[40vh] min-h-[200px] max-h-[400px] md:h-[70vh] md:min-h-[300px] md:max-h-[600px]">
+                {/* Desktop Image */}
+                <Image
+                  src={slide.desktop || "/placeholder.svg"}
+                  alt={`Desktop slide ${index + 1}`}
+                  fill
+                  priority={index === 0}
+                  className="hidden md:block object-cover"
+                />
+                {/* Mobile Image */}
+                <Image
+                  src={slide.mobile || "/placeholder.svg"}
+                  alt={`Mobile slide ${index + 1}`}
+                  fill
+                  priority={index === 0}
+                  className="block md:hidden object-cover"
+                />
+              </div>
             </div>
           ))}
         </div>

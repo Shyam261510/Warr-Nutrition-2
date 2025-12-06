@@ -212,7 +212,9 @@ export function OTPVerification({
 
             {/* Resend Code */}
             <div className="text-center space-y-2">
-              <p className="text-sm text-gray-600">Didn't receive the code?</p>
+              <p className="text-sm text-gray-600">
+                Didn&apos;t receive the code?
+              </p>
               {timeLeft > 0 ? (
                 <p className="text-sm text-gray-500">
                   Resend code in{" "}
