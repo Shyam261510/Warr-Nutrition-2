@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 import {
   ChevronLeft,
@@ -31,6 +31,8 @@ import DialogCompo from "@/app/component/comman/DialogCompo";
 import EditUserInfo from "@/app/component/EditUserInfo/EditUserInfo";
 import AddressSection from "@/app/component/AddressSection/AddressSection";
 import { toast } from "sonner";
+import PromoCodeCompo from "./PromoCode/PromoCodeCompo";
+import { PromoCodeInfoType, PROMO_CODES_INFO } from "@/constant/PromoCode";
 
 export default function CartPage() {
   const dispatch = useDispatch();
@@ -46,7 +48,11 @@ export default function CartPage() {
     (state: any) => state.dataSlice.selectedAddressId
   );
 
-  const [promoApplied, setPromoApplied] = useState(false);
+  const [promoApplied, setPromoApplied] = useState<PromoCodeInfoType>({
+    code: "",
+    discount: 0,
+  });
+  const [promoCode, setPromoCode] = useState<string>("");
   const [isAddressDrawerOpen, setIsAddressDrawerOpen] = useState(false);
   const [isopen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -65,9 +71,10 @@ export default function CartPage() {
 
   const shipping = subtotal > 100 ? 0 : 9.99;
 
-  const totalAmount = promoApplied
-    ? (subtotal * 0.9 + shipping).toFixed(2)
-    : (subtotal + shipping).toFixed(2);
+  const totalAmount =
+    validatePromoCode() && promoApplied.discount !== 0
+      ? getActualPrice(subtotal, 4.28)
+      : subtotal;
 
   useEffect(() => {
     if (!isPaymentSuccess) {
@@ -253,6 +260,13 @@ export default function CartPage() {
     });
   };
 
+  function validatePromoCode() {
+    const isValid = PROMO_CODES_INFO.find((item) => item.code === promoCode)
+      ? true
+      : false;
+    return isValid;
+  }
+
   return (
     <div>
       <main className="container mx-auto px-4 py-8">
@@ -384,12 +398,18 @@ export default function CartPage() {
                   </div>
 
                   <Separator />
+                  {/* <PromoCodeCompo
+                    promoCode={promoCode}
+                    setPromoCode={setPromoCode}
+                    setPromoApplied={setPromoApplied}
+                    promoApplied={promoApplied}
+                  /> */}
 
                   <div className="flex justify-between">
                     <span className="text-lg font-bold">Total</span>
                     <span className="text-lg font-bold text-[#B50D27]">
                       {" "}
-                      {/* 🌹 */}₹{(subtotal + shipping).toFixed(2)}
+                      ₹{totalAmount}
                     </span>
                   </div>
 
